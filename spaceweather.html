@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <script src="websiteLogic.js"></script>
+</head>
+<body id="background">
+    <div class="header">
+        <h1><strong>What is Space Weather?</strong></h1>
+        <p>Space Weather is the enviroment between the Sun and the Earth</p>
+    </div>
+    <div class="container">
+        <div class="spaceBoarder">
+            <h2>Current Sun Image</h2>
+            <img src="https://sdo.gsfc.nasa.gov/assets/img/latest/latest_4096_0193.jpg" alt="AIA 193 image of the sun" height="256" width="256">
+        </div>
+        <div class="spaceBoarder">
+            <h2>Sun Spot Map</h2>
+            <button onclick=coronalHole()>CoronalHoleify</button>
+            <img id="test" src="https://www.spaceweatherlive.com/images/SDO/SDO_HMIIF_1024.jpg"  alt="HMI Intensitygram" height="256" width="256">
+        </div>
+        <div class="spaceBoarder">
+            <h2>Coronal Hole Map</h2>
+            <img src="https://www.spaceweatherlive.com/images/SDO/latest_CHmap.jpg" alt="Coronal Hole Map" height="256" width="256">
+        </div>
+    </div>
+</body>
+</html>

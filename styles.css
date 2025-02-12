@@ -1,0 +1,37 @@
+:root{
+    --textColor: rgb(227, 214, 214);
+}
+
+div.container {
+    width:100%;
+    overflow:auto;
+  }
+div.container div {
+    width:20%;  
+    float:left;
+  }
+
+div.header{
+    background-color: rgb(42, 42, 38);
+    h1{
+        text-align: center;
+        color:var(--textColor);
+    }
+    p{
+        text-align: center;
+        color: var(--textColor);
+    }
+}
+
+div.spaceBoarder{
+    width:300px;
+    background-color: rgb(42, 42, 38);
+    h2{
+        color: var(--textColor);
+    }
+}
+
+#background{
+    background-color: rgb(24, 24, 21);
+}
+
