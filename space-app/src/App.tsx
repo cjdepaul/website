@@ -1,10 +1,8 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import { Button } from "@/components/ui/button"
 import axios from 'axios';
-import {QueryClient, useQuery} from '@tanstack/react-query'
+import {useQuery} from '@tanstack/react-query'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -26,6 +24,10 @@ function App() {
     <div className="p-4">
       <h1 className="text-2xl font-bold">Api Call</h1>
       <p>{data.status}</p>
+      <Button onClick={() => setCount(count + 1)} className="bg-amber-600">count is {count}</Button>
+      <div className="p-8 bg-red-500 text-white">
+        If this is red, Tailwind works.
+      </div>
     </div>
   );
 }
