@@ -3,34 +3,32 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { Button } from "@/components/ui/button"
+import axios from 'axios';
+import {QueryClient, useQuery} from '@tanstack/react-query'
 
 function App() {
   const [count, setCount] = useState(0)
 
+  const fetchStatus = async () => {
+  const res = await axios.get('http://localhost:8000/api/status');
+  return res.data;
+  };
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['status'],
+    queryFn: fetchStatus
+  });
+
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Error loading planet data.</p>;
+
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <Button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </Button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="p-4">
+      <h1 className="text-2xl font-bold">Api Call</h1>
+      <p>{data.status}</p>
+    </div>
+  );
 }
+
 
 export default App
