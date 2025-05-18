@@ -13,7 +13,7 @@ export const routes: RouteObject[] = [
         element: <Home />
     },
     {
-        path: '/celestial-calendar',
+        path: '/celestial-events-calendar',
         element: <CelestialCalender />
     },
     {

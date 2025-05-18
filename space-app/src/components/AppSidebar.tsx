@@ -18,8 +18,8 @@ const sidebarItems = [
     icon: <HouseIcon />,
   },
   {
-    name: "Celestial Calendar",
-    url: "/celestial-calendar",
+    name: "Celestial Events Calendar",
+    url: "/celestial-events-calendar",
     icon: <CalendarDaysIcon />,
   },
   {
@@ -54,6 +54,7 @@ export function AppSidebar() {
           alt="Space App Logo"
           className="w-[50px] h-[50px]"
         />
+        <span className="ml-2 text-lg font-semibold">Space App</span>
       </div>
       <SidebarContent>
         <SidebarGroup className="pt-0">
