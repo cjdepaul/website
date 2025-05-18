@@ -1,7 +1,8 @@
 import './App.css'
 import Layout from "@/components/layout"
 import { ThemeProvider } from '@/components/ThemeProvider';
-import Home from '@/pages/home';
+import { Route, Routes } from 'react-router';
+import { routes } from '@/components/Routes';
 
 function App() {
 
@@ -9,7 +10,11 @@ function App() {
     <ThemeProvider defaultTheme='dark'>
       <div className="App">
         <Layout>
-          <Home />
+          <Routes>
+            {routes.map((route) => (
+              <Route key={route.path} path={route.path} element={route.element} />
+            ))}
+          </Routes>
         </Layout>
       </div>
     </ThemeProvider>
