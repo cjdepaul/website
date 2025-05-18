@@ -48,7 +48,7 @@ const sidebarItems = [
 export function AppSidebar() {
   return (
 <Sidebar>
-      <div className="flex items-center justify-left p-4">
+      <div className="flex items-center justify-left p-4 pb-0">
         <img
           src={spaceLogo}
           alt="Space App Logo"
@@ -56,7 +56,7 @@ export function AppSidebar() {
         />
       </div>
       <SidebarContent>
-        <SidebarGroup>
+        <SidebarGroup className="pt-0">
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
