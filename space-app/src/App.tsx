@@ -1,4 +1,3 @@
-import './App.css'
 import Layout from "@/components/layout"
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { Route, Routes } from 'react-router';
