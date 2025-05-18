@@ -2,6 +2,7 @@ import Layout from "@/components/layout"
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { Route, Routes } from 'react-router';
 import { routes } from '@/components/Routes';
+import { PageTransition } from '@/components/PageTransition';
 
 function App() {
 
@@ -11,7 +12,7 @@ function App() {
         <Layout>
           <Routes>
             {routes.map((route) => (
-              <Route key={route.path} path={route.path} element={route.element} />
+              <Route key={route.path} path={route.path} element={<PageTransition>{route.element}</PageTransition>} />
             ))}
           </Routes>
         </Layout>
