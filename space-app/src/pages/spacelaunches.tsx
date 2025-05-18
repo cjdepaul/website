@@ -1,3 +1,4 @@
+import { PageTitle, PageDivider} from "@/components/ui/page";
 
 
 
@@ -5,7 +6,8 @@
 export default function SpaceLaunches() {
     return (
         <div>
-            <h1>Welcome to the Space Launches Page</h1>
+            <PageTitle>Space Launches</PageTitle>
+            <PageDivider />
             <p>This page will display information about upcoming space launches.</p>
         </div>
     );

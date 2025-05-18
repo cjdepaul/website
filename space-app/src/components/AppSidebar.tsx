@@ -8,8 +8,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-
 import { SatelliteIcon, SunIcon, RocketIcon, CalendarDaysIcon, HouseIcon, HeartIcon } from "lucide-react"
+import spaceLogo from "@/assets/spacelogo.svg"
  
 const sidebarItems = [
   {
@@ -48,6 +48,13 @@ const sidebarItems = [
 export function AppSidebar() {
   return (
 <Sidebar>
+      <div className="flex items-center justify-left p-4">
+        <img
+          src={spaceLogo}
+          alt="Space App Logo"
+          className="w-[50px] h-[50px]"
+        />
+      </div>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>

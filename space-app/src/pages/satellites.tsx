@@ -1,10 +1,11 @@
-
+import { PageTitle, PageDivider} from "@/components/ui/page";
 
 
 export default function Satellites() {
     return (
         <div>
-            <h1>Welcome to the Satellites Page</h1>
+            <PageTitle>Satellites</PageTitle>
+            <PageDivider />
             <p>This page will display information about various satellites.</p>
         </div>
     );

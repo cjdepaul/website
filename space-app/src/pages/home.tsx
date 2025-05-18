@@ -1,3 +1,4 @@
+import { PageTitle, PageDivider} from "@/components/ui/page";
 
 
 
@@ -5,7 +6,8 @@
 export default function Home() {
   return (
     <div>
-      <h1>Welcome to the Home Page</h1>
+      <PageTitle>Home</PageTitle>
+      <PageDivider />
     </div>
   );
 }
