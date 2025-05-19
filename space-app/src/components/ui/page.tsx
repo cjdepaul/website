@@ -5,17 +5,13 @@ interface PageTitleProps {
 }
 
 export const PageTitle: FC<PageTitleProps> = ({ children }) => {
-  return (
-    <h1 className="w-full tracking-tight text-gray-900 dark:text-gray-400">
-      {children}
-    </h1>
-  );
-};
+  return <div className="text-foreground text-2xl font-semibold pt-2">{children}</div>
+}
 
 export const PageDivider: FC = () => {
-  return (
-    <div className="my-6 w-full">
-      <hr className="border-gray-200 dark:border-gray-700" />
-    </div>
-  );
-};
+  return <div className="w-full my-4 border-b border-border" />
+}
+
+export const PageDescription: FC<PageTitleProps> = ({ children }) => {
+  return <div className="text-foreground text-sm font-normal pt-2">{children}</div>
+}
