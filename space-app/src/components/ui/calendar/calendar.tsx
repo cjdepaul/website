@@ -10,13 +10,19 @@ type eventType = {
 
 export default function CelestialCalendar({ events }: { events: eventType[] }) {
   return (
-    <FullCalendar
-      plugins={[dayGridPlugin]}
-      initialView="dayGridMonth"
-      events={events}
-      headerToolbar={false}
-      editable={false}
-      selectable={false}
-    />
+    <div>
+      <FullCalendar
+        plugins={[dayGridPlugin]}
+        initialView="dayGridMonth"
+        events={events}
+        headerToolbar={{
+            start: 'title',
+            center: '',
+            end: 'today prev,next' 
+        }}
+        editable={false}
+        selectable={false}
+      />
+    </div>
   );
 }
