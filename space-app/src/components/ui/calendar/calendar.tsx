@@ -8,6 +8,12 @@ import {
   CardTitle,
   CardDescription,
 } from '@/components/ui/card';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+  TooltipProvider
+} from '@/components/ui/tooltip';
 
 type eventType = {
     title: string;
@@ -30,6 +36,24 @@ export default function CelestialCalendar({ events }: { events: eventType[] }) {
           start: 'title',
           center: '',
           end: 'today prev,next'
+        }}
+        eventContent={(eventInfo) => {
+          return (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="w-full overflow-hidden cursor-pointer hover:bg-foreground/20 rounded-xs hover:text-accent-foreground w-full h-full"> 
+                    <p className="truncate text-sm">
+                      {eventInfo.event.title}
+                    </p>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{eventInfo.event.title}</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )
         }}
         eventClick={(info) => {
           setSelectedEvent({
