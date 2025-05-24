@@ -7,6 +7,7 @@ type celestialEventType = {
     title: string;
     startDate: string;
     endDate: string;
+    description: string;
     allDay: boolean;
 }
 
@@ -22,7 +23,8 @@ export default function CelestialCalendarPage() {
         title: event.title,
         start: event.startDate,
         end: event.endDate,
-        allDay: event.allDay
+        allDay: event.allDay,
+        description: event.description.trim(),
     }));
     return (
         <div>
