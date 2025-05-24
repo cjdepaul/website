@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { Button } from '@/components/ui/button';
 import { 
   Card,
-  CardContent,
   CardHeader,
   CardTitle,
   CardDescription,
@@ -55,10 +54,12 @@ export default function CelestialCalendar({ events }: { events: eventType[] }) {
             onClick={e => e.stopPropagation()}
           >
             <CardHeader>
-              <CardTitle>{selectedEvent.title}</CardTitle>
-              <CardDescription className="overflow-auto p-2">
-                {selectedEvent.description}
-              </CardDescription>
+              <CardTitle className="pb-4">{selectedEvent.title}</CardTitle>
+              <div className="bg-sidebar-accent rounded-md p-4">
+                <CardDescription className="overflow-auto">
+                  {selectedEvent.description}
+                </CardDescription>
+              </div>
             </CardHeader>
               <div className="p-2 flex justify-end">
                 <Button variant="outline" onClick={() => setShowModal(false)}>
