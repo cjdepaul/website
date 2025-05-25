@@ -190,3 +190,15 @@ button:focus-visible {
     @apply bg-background text-foreground;
   }
 }
+
+.fc-col-header {
+  width: 100% !important;
+}
+
+.fc-scrollgrid-sync-table {
+  width: 100% !important;
+}
+
+.fc-daygrid-body.fc-daygrid-body-unbalanced {
+  width: 100% !important;
+}
