@@ -27,10 +27,11 @@ export default function CelestialCalendarPage() {
         description: event.description.trim(),
     }));
     return (
-        <div>
+        <div className="pb-5">
             <PageTitle>Celestial Events Calendar</PageTitle>
             <PageDescription>Stay updated with celestial events and phenomena.</PageDescription>
             <PageDivider />
+
             <CelestialCalendar events={formattedEvents} />
         </div>
     );

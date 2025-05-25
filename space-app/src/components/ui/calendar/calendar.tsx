@@ -35,7 +35,7 @@ export default function CelestialCalendar({ events }: { events: eventType[] }) {
         headerToolbar={{
           start: 'title',
           center: '',
-          end: 'today prev,next'
+          end: 'prevYear,prev,next,nextYear today',
         }}
         eventContent={(eventInfo) => {
           return (
