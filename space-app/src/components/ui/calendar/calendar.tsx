@@ -23,9 +23,38 @@ type eventType = {
     allDay: boolean;
 }
 
+// Helper function to convert URLs in text to clickable links
+const linkifyText = (text: string) => {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  const parts = text.split('\n');
+  
+  return parts.map((line, lineIndex) => (
+    <span key={lineIndex}>
+      {line.split(urlRegex).map((part, partIndex) => {
+        if (urlRegex.test(part)) {
+          return (
+            <a
+              key={partIndex}
+              href={part}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-blue-300 underline break-all"
+            >
+              {part}
+            </a>
+          );
+        }
+        return part;
+      })}
+      {lineIndex < parts.length - 1 && <br />}
+    </span>
+  ));
+};
+
 export default function CelestialCalendar({ events }: { events: eventType[] }) {
   const [showModal, setShowModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<eventType | null>(null);
+  
   return (
     <div>
       <FullCalendar
@@ -81,7 +110,7 @@ export default function CelestialCalendar({ events }: { events: eventType[] }) {
               <CardTitle className="pb-4">{selectedEvent.title}</CardTitle>
               <div className="bg-sidebar-accent rounded-md p-4">
                 <CardDescription className="overflow-auto">
-                  {selectedEvent.description}
+                  {linkifyText(selectedEvent.description)}
                 </CardDescription>
               </div>
             </CardHeader>

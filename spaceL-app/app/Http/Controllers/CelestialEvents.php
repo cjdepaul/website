@@ -32,12 +32,38 @@ class CelestialEvents extends Controller
             foreach ($eventItems as $item) {
                 $dateSpan = $xpath->query('.//span[@class="date-text"]', $item)->item(0);
                 $titleSpan = $xpath->query('.//span[@class="title-text"]', $item)->item(0);
-                $description = trim($item->textContent);
-
+                
                 if ($dateSpan && $titleSpan) {
                     $date = trim($dateSpan->textContent);
                     $title = trim($titleSpan->textContent);
-                    $description = trim(string: str_replace([$date . ' - ' . $title, $date, $title], '', $description));
+                    
+                    // Extract links from the item
+                    $links = $xpath->query('.//a', $item);
+                    $linkData = [];
+                    foreach ($links as $link) {
+                        $linkData[] = [
+                            'url' => $link->getAttribute('href'),
+                            'text' => trim($link->textContent)
+                        ];
+                    }
+                    
+                    // Get clean description without the date/title prefix and format with links
+                    $description = trim($item->textContent);
+                    $description = trim(str_replace([$date . ' - ' . $title, $date, $title], '', $description));
+                    
+                    // Remove the link text from description since we'll format it separately
+                    foreach ($linkData as $linkInfo) {
+                        $description = str_replace('(' . $linkInfo['text'] . ')', '', $description);
+                    }
+                    $description = trim($description);
+                    
+                    // Format links as HTML for display
+                    if (!empty($linkData)) {
+                        $description .= "\n\nUseful Links:";
+                        foreach ($linkData as $linkInfo) {
+                            $description .= "\n• " . $linkInfo['text'] . ": " . $linkInfo['url'];
+                        }
+                    }
 
                     $dateParts = explode('-', $date);
                     $startDate = trim($dateParts[0]);
@@ -71,6 +97,7 @@ class CelestialEvents extends Controller
                         'endDate' => $endDateFormatted,
                         'title' => $title,
                         'description' => $description,
+                        'links' => $linkData, // Include links as separate data
                         'allDay' => true
                     ];
                 }
