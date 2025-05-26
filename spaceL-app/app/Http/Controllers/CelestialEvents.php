@@ -97,7 +97,7 @@ class CelestialEvents extends Controller
                         'endDate' => $endDateFormatted,
                         'title' => $title,
                         'description' => $description,
-                        'links' => $linkData, // Include links as separate data
+                        'links' => $linkData,
                         'allDay' => true
                     ];
                 }
