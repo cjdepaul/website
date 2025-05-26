@@ -9,6 +9,7 @@ Route::prefix('v1')->group(function () {
         return response()->json(['status' => 'API is running']);
     });
     Route::get('/celestial-events', [CelestialEvents::class, 'getCelestialEvents']);
+    Route::get('/space-weather', [App\Http\Controllers\SpaceWeatherController::class, 'getSpaceWeather']);
 });
 
 // This could be an example for authentification needs
