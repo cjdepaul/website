@@ -15,7 +15,7 @@ class SpaceWeatherController extends Controller
             'kp' => $this->getKp(),
             'CME_detection' => $this->getCme(),
             'flares' => $this->getFlares(),
-            'aurora_chance' => $this->getAurora()
+            'aurora_chance' => $this->getAurora(lon: -92.9594, lat: 44.9239)
 
         ]);
     }
@@ -285,10 +285,34 @@ class SpaceWeatherController extends Controller
         }
         return $flares;
     }
-    private function getAurora()
+
+
+    // Eventualy this function or another could be used to make a custom graphic of the auroral oval
+    /**
+     * Fetches the aurora chance based on latitude and longitude.
+     * Uses NOAA's OVATION aurora service.
+     *
+     * @param float $lon Longitude
+     * @param float $lat Latitude
+     * @return string | int | null
+     */
+    private function getAurora($lon, $lat)
     {
-        // Logic to get Aurora
-        return 'Aurora Data';
+        $lat = round($lat);
+        $lon = round($lon);
+        $lon = $lon < 0 ? $lon + 360 : $lon;
+        $url = 'https://services.swpc.noaa.gov/json/ovation_aurora_latest.json';
+        $response = file_get_contents($url);
+        if ($response === false) {
+            return 'Error fetching aurora data';
+        }
+        $data = json_decode($response, true);
+        $data = $data['coordinates'];
+        foreach ($data as $item) {
+            if ($item[1] == $lat && $item[0] == $lon) {
+                return $item[2];
+            }
+        }
     }
 
 }
