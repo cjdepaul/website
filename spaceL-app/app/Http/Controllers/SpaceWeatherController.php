@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-
 class SpaceWeatherController extends Controller
 {
     public function getSpaceWeather()
     {
         return response()->json([
-            'current_scales' => $this->getcurrentScales(),
+            'scales' => $this->getcurrentScales(),
             'speed' => $this->getSpeed(),
             'density' => $this->getDensity(),
             'bz' => $this->getBz(),
@@ -25,8 +22,25 @@ class SpaceWeatherController extends Controller
 
     private function getcurrentScales()
     {
-        // Logic to get current scales
-        return 'Current Scales Data';
+        $url = 'http://services.swpc.noaa.gov/products/noaa-scales.json';
+        $response = file_get_contents($url);
+        if ($response === false) {
+            return 'Error fetching current scales data';
+        }
+        $data = json_decode($response, true);
+        $returnData = [
+            'current_scales' => [
+                'G' => $data['0']['G']['Scale'],
+                'S' => $data['0']['S']['Scale'],
+                'R' => $data['0']['R']['Scale'],
+            ],
+            '24h_scales' => [
+                'G' => $data['-1']['G']['Scale'],
+                'S' => $data['-1']['S']['Scale'],
+                'R' => $data['-1']['R']['Scale'],
+            ]
+        ];
+        return $returnData;
     }
     private function getSpeed()
     {
