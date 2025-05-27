@@ -189,11 +189,80 @@ class SpaceWeatherController extends Controller
         }
         return $kp_array;
     }
+    /**
+     * Fetches the CME detection data.
+     * This will see if there is a CME headed towards Earth.
+     * Data looks back 3 days from today.
+     *
+     * @return array | string
+     */
     private function getCme()
     {
-        // Logic to get CME
-        return 'CME Data';
+        $currentDate = date('Y-m-d');
+        $yesterdayDate = date('Y-m-d', strtotime('-3 day'));
+        $url = 'https://kauai.ccmc.gsfc.nasa.gov/DONKI/WS/get/CME?startDate=' . $yesterdayDate . '&endDate=' . $currentDate;
+
+            $response = file_get_contents($url);
+            if ($response === false) {
+                return "Error fetching CME data";
+            }
+            
+            $cmes = json_decode($response, true);
+            if (empty($cmes)) {
+                return "No CME data available";
+            }
+
+            $most_severe_cme = null;
+            $severity = -1; 
+            $estimated_shock_arrival_time = null;
+            // looks through each CME and calculates based on lat and lon if it will hit Earth
+            foreach ($cmes as $cme) {
+                foreach ($cme['cmeAnalyses'] ?? [] as $analysis) {
+                    $lat = $analysis['latitude'] ?? null;
+                    $lon = $analysis['longitude'] ?? null;
+                    $half_angle = $analysis['halfAngle'] ?? null;
+                    $enlil_list = $analysis['enlilList'] ?? [];
+                    
+                    if ($lat === null || $lon === null || $half_angle === null) {
+                        continue;
+                    }
+
+                    $earth_gb = false;
+                    foreach ($enlil_list as $enlil) { //checks for earthGB meaning it will partially hit Earth
+                        if ($enlil['isEarthGB'] ?? false) {
+                            $earth_gb = true;
+                            break;
+                        }
+                    }
+
+                    $current_severity = 0;
+                    if ($earth_gb) {
+                        $current_severity = 1;
+                    }
+                    if (($lat == 0 && $lon == 0) || 
+                        ($lat - $half_angle <= 0 && 0 <= $lat + $half_angle && 
+                         $lon - $half_angle <= 0 && 0 <= $lon + $half_angle)) {
+                        $current_severity = 2;
+                    }
+
+                    if ($current_severity > $severity) {
+                        $severity = $current_severity;
+                        $most_severe_cme = $analysis;
+                        if (!empty($enlil_list)) {
+                            $estimated_shock_arrival_time = $enlil_list[0]['estimatedShockArrivalTime'] ?? null;
+                        }
+                    }
+                }
+            }
+
+            return $most_severe_cme ? [$severity, $estimated_shock_arrival_time] : null;
     }
+
+    /**
+     * Collects 7 days worth of solar flare data from NOAA's SWPC service.
+     * 
+     * @return array | string
+     */
     private function getFlares()
     {
         $url = 'https://services.swpc.noaa.gov/json/goes/primary/xray-flares-7-day.json';
