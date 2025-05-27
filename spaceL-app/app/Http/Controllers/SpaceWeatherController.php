@@ -196,8 +196,25 @@ class SpaceWeatherController extends Controller
     }
     private function getFlares()
     {
-        // Logic to get Flares
-        return 'Flares Data';
+        $url = 'https://services.swpc.noaa.gov/json/goes/primary/xray-flares-7-day.json';
+        $response = file_get_contents($url);
+        if ($response === false) {
+            return 'Error fetching flares data';
+        }
+        $data = json_decode($response, true);
+        $flares = [];
+        foreach ($data as $item) {
+            $flares[] = [
+                'begin_time' => $item['begin_time'],
+                'begin' => $item['begin_class'],
+                'max_time' => $item['max_time'],
+                'max' => $item['max_class'],
+                'end_time' => $item['end_time'],
+                'end' => $item['end_class'],
+
+            ];
+        }
+        return $flares;
     }
     private function getAurora()
     {
