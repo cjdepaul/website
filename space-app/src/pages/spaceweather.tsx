@@ -47,14 +47,41 @@ export default function SpaceWeather() {
             <PageTitle>Space Weather</PageTitle>
             <PageDescription>This page will display information about space weather.</PageDescription>
             <PageDivider />
-            <div className="bg-white">
-            <Gauge
-                value={data?.speed[data.speed.length - 1]}
-                startAngle={-90}
-                endAngle={90}
-                innerRadius="80%"
-                outerRadius="100%"
-            />
+            
+            {/* 3x3 Grid for Charts and Graphs */}
+            <div className="grid grid-cols-3 gap-4 p-4">
+                {/* Row 1 */}
+                <div className="border rounded p-4 h-64">
+                    {/* Chart 1 - Aurora Chance Gauge */}
+                </div>
+                <div className="border rounded p-4 h-64">
+                    {/* Chart 2 - Solar Wind Speed */}
+                </div>
+                <div className="border rounded p-4 h-64">
+                    {/* Chart 3 - Solar Wind Density */}
+                </div>
+
+                {/* Row 2 */}
+                <div className="border rounded p-4 h-64">
+                    {/* Chart 4 - Magnetic Field Bt */}
+                </div>
+                <div className="border rounded p-4 h-64">
+                    {/* Chart 5 - Magnetic Field Bz */}
+                </div>
+                <div className="border rounded p-4 h-64">
+                    {/* Chart 6 - Solar Flares Timeline */}
+                </div>
+
+                {/* Row 3 */}
+                <div className="border rounded p-4 h-64">
+                    {/* Chart 7 - CME Detection */}
+                </div>
+                <div className="border rounded p-4 h-64">
+                    {/* Chart 8 - Current Scales Status */}
+                </div>
+                <div className="border rounded p-4 h-64">
+                    {/* Chart 9 - 24h Scales Forecast */}
+                </div>
             </div>
         </div>
     );
