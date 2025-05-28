@@ -12,7 +12,7 @@ type celestialEventType = {
 }
 
 export default function CelestialCalendarPage() {
-    const { data: events = [] } = useQuery<celestialEventType[]>({
+    const { data: events = [], isLoading } = useQuery<celestialEventType[]>({
         queryKey: ['celestial-events'],
         queryFn: async () => {
             const response = await api.get('/api/v1/celestial-events');
@@ -26,6 +26,19 @@ export default function CelestialCalendarPage() {
         allDay: event.allDay,
         description: event.description.trim(),
     }));
+
+    if (isLoading) {
+        return (
+        <div className="pb-5">
+            <PageTitle>Celestial Events Calendar</PageTitle>
+            <PageDescription>Stay updated with celestial events and phenomena.</PageDescription>
+            <PageDivider />
+            <div className="text-center animate-pulse">Loading celestial events into calendar<span className="animate-[dots_1s_ease-in-out_infinite]">...</span></div>
+            <CelestialCalendar events={formattedEvents} />
+        </div>
+        );
+    }
+
     return (
         <div className="pb-5">
             <PageTitle>Celestial Events Calendar</PageTitle>
