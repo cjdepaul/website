@@ -2,6 +2,7 @@ import { PageTitle, PageDescription, PageDivider} from "@/components/ui/page";
 import CelestialCalendar from "@/components/ui/calendar/calendar";
 import { api } from "@/lib/axios";
 import { useQuery } from "@tanstack/react-query";
+import { Skeleton } from "@mui/material";
 
 type celestialEventType = {
     title: string;
@@ -34,7 +35,54 @@ export default function CelestialCalendarPage() {
             <PageDescription>Stay updated with celestial events and phenomena.</PageDescription>
             <PageDivider />
             <div className="text-center animate-pulse">Loading celestial events into calendar<span className="animate-[dots_1s_ease-in-out_infinite]">...</span></div>
-            <CelestialCalendar events={formattedEvents} />
+            <div className="flex mt-5 w-full">
+                <div className="w-full">
+                    <div className="flex justify-between w-full items-center">
+                        <div>
+                            <Skeleton sx={{ 
+                                bgcolor: 'var(--sidebar)',
+                           }} variant="text" width={200} height={70} 
+                           />
+                        </div>
+                        <div className="flex items-center gap-4">
+                            <Skeleton sx={{
+                                bgcolor: 'var(--sidebar)',
+                            }} variant="text" width={200} height={70} />
+
+                            <Skeleton sx={{
+                                bgcolor: 'var(--sidebar)',
+                            }} variant="text" width={100} height={70} />
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-7 gap-2 mt-4">
+                        {/* Week day names skeleton */}
+                        {Array.from({ length: 7 }).map((_, i) => (
+                            <Skeleton
+                                key={`weekday-${i}`}
+                                sx={{ bgcolor: 'var(--sidebar)' }}
+                                variant="rectangular"
+                                height={30}
+                            />
+                        ))}
+                        {/* Calendar days skeleton */}
+                        {Array.from({ length: 42 }).map((_, i) => (
+                            <Skeleton
+                                key={`day-${i}`}
+                                sx={{ 
+                                    bgcolor: 'var(--sidebar)',
+                                    height: {
+                                        xs: 100, // Small screens
+                                        sm: 150, // Medium screens
+                                        md: 180, // Large screens
+                                        lg: 200  // Extra large screens
+                                    }
+                                }}
+                                variant="rectangular"
+                            />
+                        ))}
+                    </div>
+                </div>
+            </div>
         </div>
         );
     }
