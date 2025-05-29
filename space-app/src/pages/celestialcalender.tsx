@@ -34,7 +34,7 @@ export default function CelestialCalendarPage() {
             <PageTitle>Celestial Events Calendar</PageTitle>
             <PageDescription>Stay updated with celestial events and phenomena.</PageDescription>
             <PageDivider />
-            <div className="text-center animate-pulse">Loading celestial events into calendar<span className="animate-[dots_1s_ease-in-out_infinite]">...</span></div>
+            <div className="text-center">Loading celestial events into calendar<span className="dots"></span></div>
             <div className="flex mt-5 w-full">
                 <div className="w-full">
                     <div className="flex justify-between w-full items-center">
