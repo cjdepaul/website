@@ -55,7 +55,6 @@ export default function CelestialCalendarPage() {
                         </div>
                     </div>
                     <div className="grid grid-cols-7 gap-2 mt-4">
-                        {/* Week day names skeleton */}
                         {Array.from({ length: 7 }).map((_, i) => (
                             <Skeleton
                                 key={`weekday-${i}`}
@@ -64,17 +63,16 @@ export default function CelestialCalendarPage() {
                                 height={30}
                             />
                         ))}
-                        {/* Calendar days skeleton */}
                         {Array.from({ length: 42 }).map((_, i) => (
                             <Skeleton
                                 key={`day-${i}`}
                                 sx={{ 
                                     bgcolor: 'var(--sidebar)',
                                     height: {
-                                        xs: 100, // Small screens
-                                        sm: 150, // Medium screens
-                                        md: 180, // Large screens
-                                        lg: 200  // Extra large screens
+                                        sm: '80px',
+                                        md: '100px',
+                                        lg: '100px',
+                                        xl: '200px'
                                     }
                                 }}
                                 variant="rectangular"
