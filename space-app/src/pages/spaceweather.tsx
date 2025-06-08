@@ -2,6 +2,7 @@ import { PageTitle, PageDescription, PageDivider} from "@/components/ui/page";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/axios";
 import SpaceAreaChart  from "@/components/ui/charts/spaceArea";
+import AuroraChance from "@/components/ui/charts/AuroraChance";
 
 type SpaceWeatherData = {
     scales: {
@@ -85,7 +86,7 @@ export default function SpaceWeather() {
                         }))}
                         timeRange="1h"
                         unit = "nT"
-                        name="Interplanetary Magnetic Field BT"
+                        name="Interplanetary Magnetic Field Bt"
                     />
                 </div>
 
@@ -98,7 +99,7 @@ export default function SpaceWeather() {
                         }))}
                         timeRange="1h"
                         unit = "nT"
-                        name="BZ"
+                        name="Bz"
                     />
                 </div>
                 <div className="border rounded p-4 h-60">
@@ -116,7 +117,7 @@ export default function SpaceWeather() {
                     {/* Chart 8 - 24h Scales Forecast */}
                 </div>
                 <div className="border rounded p-4 h-60">
-                    {/* Chart 9 - Aurora Chance */}
+                    <AuroraChance chance={data.aurora_chance} />
                 </div>
             </div>
         </div>
