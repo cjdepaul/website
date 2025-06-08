@@ -79,32 +79,32 @@ export default function SpaceAreaChart({
       <div className="flex items-center justify-between">
         <DropdownMenu>
           <DropdownMenuTrigger className="text-xs px-3 py-1 bg-violet-700 hover:bg-violet-600 text-white rounded mb-2">
-        {selectedTimeRange}
+            {selectedTimeRange}
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-        <DropdownMenuLabel>Time Range</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        {["1h", "6h", "12h", "24h", "1w"].map((range) => (
-          <DropdownMenuItem
-            key={range}
-            onClick={() => setSelectedTimeRange(range)}
-          >
-            {range === "1h"
-          ? "Last Hour"
-          : range === "1w"
-          ? "Last Week"
-          : `Last ${range.replace("h", " Hours")}`}
-          </DropdownMenuItem>
-        ))}
+            <DropdownMenuLabel>Time Range</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            {["1h", "6h", "12h", "24h", "1w"].map((range) => (
+              <DropdownMenuItem
+                key={range}
+                onClick={() => setSelectedTimeRange(range)}
+              >
+                {range === "1h"
+                  ? "Last Hour"
+                  : range === "1w"
+                  ? "Last Week"
+                  : `Last ${range.replace("h", " Hours")}`}
+              </DropdownMenuItem>
+            ))}
           </DropdownMenuContent>
         </DropdownMenu>
         <span className="flex-1 text-center">
           <strong>{name}</strong> :{" "}
           {(typeof filteredData[filteredData.length - 1]?.value === "number"
-        ? filteredData[filteredData.length - 1].value
-        : parseFloat(
-            String(filteredData[filteredData.length - 1]?.value)
-          ) || 0
+            ? filteredData[filteredData.length - 1].value
+            : parseFloat(
+                String(filteredData[filteredData.length - 1]?.value)
+              ) || 0
           ).toFixed(2)}{" "}
           {unit}
         </span>
