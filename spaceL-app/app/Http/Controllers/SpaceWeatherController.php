@@ -15,7 +15,7 @@ class SpaceWeatherController extends Controller
             'kp' => $this->getKp(),
             'CME_detection' => $this->getCme(),
             'flares' => $this->getFlares(),
-            'aurora_chance' => $this->getAurora(lon: -92.9594, lat: 44.9239)
+            'aurora_chance' => $this->getAurora(lon: 0, lat: -81)
 
         ]);
     }
