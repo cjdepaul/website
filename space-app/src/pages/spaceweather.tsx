@@ -4,6 +4,7 @@ import { api } from "@/lib/axios";
 import SpaceAreaChart from "@/components/ui/charts/spaceArea";
 import AuroraChance from "@/components/ui/charts/AuroraChance";
 import { Skeleton } from "@mui/material";
+import CMEDetection from "@/components/ui/charts/CMEDetection";
 
 type SpaceWeatherData = {
   scales: {
@@ -22,7 +23,7 @@ type SpaceWeatherData = {
   density: number[];
   bt: number[];
   bz: number[];
-  CME_detection: [];
+  CME_detection: [number, string] | [];
   flares: Array<{
     begin_time: string;
     begin: string;
@@ -138,8 +139,12 @@ export default function SpaceWeather() {
         <div className="border rounded p-4 h-60">
           {/* Chart 5 - Solar Flares Timeline */}
         </div>
-        <div className="border rounded p-4 h-60">
+        <div className="border rounded p-4 h-60 flex">
           {/* Chart 6 - CME Detection */}
+              <CMEDetection
+                severity={(data.CME_detection[0] || 0) as 0 | 1 | 2}
+                arrivalTime={data.CME_detection[1] || ""}
+              />
         </div>
 
         {/* Row 3 */}
@@ -156,3 +161,4 @@ export default function SpaceWeather() {
     </div>
   );
 }
+
