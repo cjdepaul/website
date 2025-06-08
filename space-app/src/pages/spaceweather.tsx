@@ -53,45 +53,69 @@ export default function SpaceWeather() {
             <PageDescription>This page will display information about space weather.</PageDescription>
             <PageDivider />
             
-            {/* 3x3 Grid for Charts and Graphs */}
             <div className="grid grid-cols-3 gap-4 p-4">
-                {/* Row 1 */}
-                <div className="border rounded p-4 h-64">
-                         {/* Chart 1 - Solar Wind Speed */}
+                <div className="border rounded p-4 h-60">
                     <SpaceAreaChart
                         data={data.speed.map((value, index) => ({
                             time: new Date(Date.now() - (data.speed.length - index - 1) * 60000).toISOString(),
-                            value: value
+                            value: value,
                         }))}
-                        timeRange="24h"
+                        timeRange="1h"
+                        unit="km/s"
+                        name="Solar Wind Speed"
                     />
                 </div>
-                <div className="border rounded p-4 h-64">
-                    {/* Chart 2 - Solar Wind Density */}
+                <div className="border rounded p-4 h-60">
+                    <SpaceAreaChart
+                        data={data.density.map((value, index) => ({
+                            time: new Date(Date.now() - (data.density.length - index - 1) * 60000).toISOString(),
+                            value: value,
+                        }))}
+                        timeRange="1h"
+                        unit="p/cm^3"
+                        name="Solar Wind Density"
+                    />
                 </div>
-                <div className="border rounded p-4 h-64">
-                    {/* Chart 3 - Magnetic Field Bt */}
+                <div className="border rounded p-4 h-60">
+                    <SpaceAreaChart
+                        data={data.bt.map((value, index) => ({
+                            time: new Date(Date.now() - (data.bt.length - index - 1) * 60000).toISOString(),
+                            value: value,
+                            unit: 'nT'
+                        }))}
+                        timeRange="1h"
+                        unit = "nT"
+                        name="Interplanetary Magnetic Field BT"
+                    />
                 </div>
 
                 {/* Row 2 */}
-                <div className="border rounded p-4 h-64">
-                    {/* Chart 4 - Magnetic Field Bz */}
+                <div className="border rounded p-4 h-60">
+                    <SpaceAreaChart
+                        data={data.bz.map((value, index) => ({
+                            time: new Date(Date.now() - (data.bz.length - index - 1) * 60000).toISOString(),
+                            value: value,
+                        }))}
+                        timeRange="1h"
+                        unit = "nT"
+                        name="BZ"
+                    />
                 </div>
-                <div className="border rounded p-4 h-64">
+                <div className="border rounded p-4 h-60">
                     {/* Chart 5 - Solar Flares Timeline */}
                 </div>
-                <div className="border rounded p-4 h-64">
+                <div className="border rounded p-4 h-60">
                     {/* Chart 6 - CME Detection */}
                 </div>
 
                 {/* Row 3 */}
-                <div className="border rounded p-4 h-64">
+                <div className="border rounded p-4 h-60">
                     {/* Chart 7 - Current Scales Status */}
                 </div>
-                <div className="border rounded p-4 h-64">
+                <div className="border rounded p-4 h-60">
                     {/* Chart 8 - 24h Scales Forecast */}
                 </div>
-                <div className="border rounded p-4 h-64">
+                <div className="border rounded p-4 h-60">
                     {/* Chart 9 - Aurora Chance */}
                 </div>
             </div>
